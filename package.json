@@ -1,8 +1,26 @@
 {
-  "type": "module",
   "dependencies": {
+    "babel-loader": "^8.2.2",
     "bootstrap": "^5.0.0-alpha1",
     "bootstrap-icons": "^1.4.1",
-    "express": "^4.17.1"
+    "css-loader": "^5.2.1",
+    "express": "^4.17.1",
+    "html-webpack-plugin": "^5.3.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.31.2",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "scripts": {
+    "start": "nodemon src/server.js",
+    "prepack": "npx webpack -p"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.14",
+    "@babel/core": "^7.13.15",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.13.15",
+    "mini-css-extract-plugin": "^1.4.1",
+    "nodemon": "^2.0.7"
   }
 }
