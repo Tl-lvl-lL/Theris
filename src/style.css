@@ -1,5 +1,26 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(100, 93, 150);
+}
+#game {
+    border: black solid 5px;
+    margin: 10px auto; /*calc(100% - 500px)*/
+    height: 510px;
+    width: 510px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* overflow-wrap: normal; */
+}
+
+button {
+    margin: 10px 100px;
+    padding: 10px 30px;
+    border-radius: 25px;
+    font: sans-serif 2em;
 }
