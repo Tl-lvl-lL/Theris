@@ -16,8 +16,8 @@ let game = new Canva(),
     fig = new Figure("green", "T");
 
 // fig.setLocation();
-fig.setPosition();
-
+// fig.setPosition();
+fig.sidewayMove();
 // game.start();
 // game.move();
 let bttn = document.getElementsByTagName("button").item(0);
