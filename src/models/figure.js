@@ -1,17 +1,38 @@
 export default class Figure {
+    /**
+     * It would inheritence the next values
+     *  Canva limits
+     *  Canva Elements
+     *  Canva Background Color
+     * */
     constructor(color, name) {
         this.length = 4;
         this.color = color;
         this.name = name;
         this.height = 3;
         this.width = 3;
-        //Considering the this.canvaGrid is a square, i.e. L**2
         this.canvaGrid = Array.from(document.getElementById("game").children);
-        this.sideStop = Math.sqrt(this.canvaGrid.length);
+        this.rightSideStop = Math.sqrt(this.canvaGrid.length);
+        this._position = 90 * Math.round(Math.random() * 3);
+        this._location = Math.round(Math.random() * (this.rightSideStop - 3));
+
+        //Considering the this.canvaGrid is a square, i.e. L**2
 
         this.limits = [];
     }
 
+    container() {
+        return this.canvaGrid
+            .slice(this._location, this._location + 3)
+            .concat(
+                this.canvaGrid.slice(
+                    (this._location += 10),
+                    this._location + 3
+                ),
+                this.canvaGrid.slice((this._location += 10), this._location + 3)
+            );
+    }
+    // To move we need to know Location and position, apart of direction
     sidewayMove() {
         /**
          * Move the figure when I press key ArrowLeft || ArrowRight
@@ -23,8 +44,12 @@ export default class Figure {
          * after moving we restore color
          */
         let [figure, container] = this.setLocation();
+        console.log(figure);
         let iterator = figure.entries();
         let locationElements = [];
+        // let { figurePosition, bigSquare } = this.setPosition();
+
+        // figurePosition.forEach((e) => console.log(e));
         /**
          * 
          * console.log(typeof iterator.next().value[1]);
@@ -41,31 +66,45 @@ export default class Figure {
         document.addEventListener("keyup", (e) => {
             if (e.key == "ArrowRight") {
                 // reset before colors
-                container.forEach(
+                this.canvaGrid.forEach(
                     (containerElem) =>
                         (containerElem.style.backgroundColor = "yellow")
                 );
-                // Error : Wrong tiles ; Recomend add 3
-                if (locationElements[2] <= this.sideStop) {
+                if (locationElements[2] <= this.rightSideStop - 2) {
                     console.log(locationElements[2]);
-                    locationElements = locationElements.map((x) => (x += 2));
+                    locationElements = locationElements.map((x) => (x += 1));
 
                     locationElements.forEach((e) => {
                         this.canvaGrid[e].style.backgroundColor = "green";
                     });
                 }
             } else if (e.key == "ArrowLeft") {
+                // reset before colors
+                this.canvaGrid.forEach(
+                    (containerElem) =>
+                        (containerElem.style.backgroundColor = "yellow")
+                );
+                // Error : Wrong tiles ; Recomend add 3
+                if (locationElements[0] > 0) {
+                    console.log(locationElements[2]);
+                    locationElements = locationElements.map((x) => (x -= 1));
+
+                    locationElements.forEach((e) => {
+                        this.canvaGrid[e].style.backgroundColor = "green";
+                    });
+                }
             }
         });
+
+        return locationElements;
     }
 
     setLocation() {
-        // Always on top
-
-        if (Number.isInteger(this.sideStop)) {
+        // left to do dynamic canvas, now I work with 10 times 10
+        if (Number.isInteger(this.rightSideStop)) {
             // Minus two so that there are exacly big square is needed 8 spaces, but begins by 0
             let radomTileSelection = Math.round(
-                Math.random() * (this.sideStop - 3)
+                Math.random() * (this.rightSideStop - 3)
             );
             console.log(`This is the random selection ${radomTileSelection}`);
 
@@ -88,17 +127,33 @@ export default class Figure {
                 );
 
             // create figure inside of big square
-            let t = bigSquare.slice(0, 3).concat(bigSquare[4], bigSquare[7]);
+            // let t = bigSquare.slice(0, 3).concat(bigSquare[4], bigSquare[7]);
 
-            t.forEach((x) => (x.style.backgroundColor = "green"));
+            // t.forEach((x) => (x.style.backgroundColor = "green"));
 
-            return [t, bigSquare];
+            return bigSquare;
         }
     }
 
     setPosition() {
-        let [figure, bigSquare] = this.setLocation();
+        let bigSquare = this.setLocation();
+        console.log(bigSquare);
+        // let indexSquare = this.sidewayMove();
 
+        // let bigSquare = this.canvaGrid
+        //     .slice(indexSquare[0], indexSquare[2] + 1)
+        //     .concat(
+        //         this.canvaGrid.slice(indexSquare[3] - 2, indexSquare[3] + 1),
+        //         this.canvaGrid.slice(indexSquare[4] - 2, indexSquare[4] + 1)
+        //     );
+
+        // bigSquare.forEach((e) => console.log(e));
+        // console.log(ObigSquare.length);
+
+        // for (let i = 0; i < indexSquare.length; i++) {
+        //     let ele = this.canvaGrid.indexOf(iterator.next().value[1]);
+        //     locationElements.push(ele);
+        // }
         /**
          * when press a Up tile change position
          *
@@ -120,11 +175,17 @@ export default class Figure {
         // reset
         bigSquare.forEach((e) => (e.style.backgroundColor = "yellow"));
 
-        let t;
-        let position = 0;
+        let t; // It means figure T
+        let position = 90 * Math.round(Math.random() * 3);
 
+        bigSquare.forEach((e) => (e.style.backgroundColor = "yellow"));
+        console.log("original position");
+        t = bigSquare.slice(0, 3).concat(bigSquare[4], bigSquare[7]);
+
+        t.forEach((x) => (x.style.backgroundColor = "green"));
+        this.limits = bigSquare.slice(0, 3).concat(bigSquare[7]);
+        console.log(position);
         document.addEventListener("keyup", (e) => {
-            console.log(e);
             if (e.key == "ArrowUp") {
                 switch (position) {
                     case 0:
@@ -136,6 +197,7 @@ export default class Figure {
                             .slice(0, 3)
                             .concat(bigSquare[4], bigSquare[7]);
 
+                        console.log(t);
                         this.limits = bigSquare
                             .slice(0, 3)
                             .concat(bigSquare[7]);
@@ -200,14 +262,19 @@ export default class Figure {
                 }
             }
         });
+
+        console.log(bigSquare);
+        return { t, bigSquare };
     }
 
-    getPosition() {
-        return "Orientation X and Y";
+    get position() {
+        console.log("Orientation X and Y");
+        return this._position;
     }
 
-    getLocation() {
-        return "An array of each square";
+    get location() {
+        console.log("An array of each square");
+        return this._location;
     }
 
     resetColors() {}

@@ -1,23 +1,23 @@
 import Canva from "../models/canva.js";
 import Figure from "../models/figure.js";
-const counter = 100;
 
-for (let i = 0; i < counter; i++) {
-    let e = document.createElement("div");
-    e.setAttribute("id", i);
-    e.style.border = "black solid 1px";
-    e.style.height = "50px";
-    e.style.width = "50px";
+document.addEventListener("load", (e) => {
+    let game = new Canva();
+    game.initializer();
+});
 
-    document.getElementById("game").appendChild(e);
-}
-
-let game = new Canva(),
-    fig = new Figure("green", "T");
+// fig = new Figure("green", "T");
 
 // fig.setLocation();
 // fig.setPosition();
-fig.sidewayMove();
+// console.log(fig.location);
+// console.log(fig.position);
+// // fig.container().forEach((e) => {
+// //     console.log(e.getAttribute("id"));
+// //     console.log(typeof e);
+// });
+// console.log(f, t);
+// fig.sidewayMove();
 // game.start();
 // game.move();
 let bttn = document.getElementsByTagName("button").item(0);

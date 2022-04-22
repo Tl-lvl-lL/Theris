@@ -1,7 +1,52 @@
 export default class Canva {
-    static #from;
-    static #to;
     constructor() {
+        this._counter = 100;
+        this._elementContainer = document.getElementById("game");
+        this._arrayElementsContainer = Array.from(this._elementContainer);
+    }
+    initializer() {
+        // this.initializer();
+        for (let i = 0; i < this._counter; i++) {
+            let e = document.createElement("div");
+            e.setAttribute("id", i);
+            e.style.border = "black solid 1px";
+            e.style.height = "50px";
+            e.style.width = "50px";
+
+            this._elementContainer.appendChild(e);
+        }
+        console.log(this._arrayElementsContainer);
+        // this._elementContainer.forEach((i) => {
+        //     i.style.backgroundColor = "yellow";
+        // });
+    }
+
+    start() {}
+    stop() {}
+    move() {}
+}
+
+/**
+ *                    // document.addEventListener("keyup", (e) => {
+                    //     e.defaultPrevented;
+                    //     // this.getFrom -1 -> +10 -> -10 -> -10
+                    //     let IUp = [];
+                    //     let medium = this.getFrom - 1,
+                    //         upMedium = medium - 10;
+
+                    //     IUp.push(this.arrModel[medium]);
+                    //     IUp.push(this.arrModel[(medium += 10)]);
+                    //     IUp.push(this.arrModel[(medium -= 10)]);
+                    //     IUp.push(this.arrModel[(medium -= 10)]);
+
+                    //     IUp.forEach((x) => (x.style.backgroundColor = "green"));
+                    // });
+                    console.log(i);
+ 
+*/
+
+/* 
+    Constructor
         // this.#from;
         // this.#to;
         this.frame = document.getElementById("game");
@@ -11,20 +56,8 @@ export default class Canva {
 
         // Draw figure on the grid
         this.initializer();
-    }
-
-    static {
-        this.#from = Math.round(Math.random() * 6);
-        this.#to = this.#from + 4;
-    }
-
-    initializer() {
-        this.dynamicFigure.forEach((i) => {
-            i.style.backgroundColor = "yellow";
-        });
-    }
-
-    start() {
+    Start
+{
         this.interval = setInterval(() => {
             if (!(this.getFrom > 96)) {
                 for (let n of this.dynamicFigure) {
@@ -52,10 +85,9 @@ export default class Canva {
             //     }
         }, 2000);
     }
-    stop() {
-        clearInterval(this.interval);
-    }
-    move() {
+    Stop
+clearInterval(this.interval);
+    Move
         document.addEventListener("keyup", () => {
             let block1 = this.#to - 1;
             let [block2, block3, block4] = [
@@ -66,24 +98,5 @@ export default class Canva {
             console.log(block1, block2, block3, block4);
             console.log(this.dynamicFigure);
         });
-    }
-}
 
-/**
- *                    // document.addEventListener("keyup", (e) => {
-                    //     e.defaultPrevented;
-                    //     // this.getFrom -1 -> +10 -> -10 -> -10
-                    //     let IUp = [];
-                    //     let medium = this.getFrom - 1,
-                    //         upMedium = medium - 10;
-
-                    //     IUp.push(this.arrModel[medium]);
-                    //     IUp.push(this.arrModel[(medium += 10)]);
-                    //     IUp.push(this.arrModel[(medium -= 10)]);
-                    //     IUp.push(this.arrModel[(medium -= 10)]);
-
-                    //     IUp.forEach((x) => (x.style.backgroundColor = "green"));
-                    // });
-                    console.log(i);
- 
-*/
+  */
