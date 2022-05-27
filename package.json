@@ -1,8 +1,27 @@
 {
   "type": "module",
-  "dependencies": {
-    "bootstrap": "^5.0.0-alpha1",
-    "bootstrap-icons": "^1.4.1",
-    "express": "^4.17.1"
-  }
+  "name": "tetris",
+  "version": "2.0.0",
+  "description": "Javascript Object Oriented applied to tetris",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tl-lvl-lL/Theris.git"
+  },
+  "keywords": [
+    "OOP",
+    "Vanilla",
+    "Frontend",
+    "Game",
+    "Tetris"
+  ],
+  "author": "Mariano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tl-lvl-lL/Theris/issues"
+  },
+  "homepage": "https://github.com/Tl-lvl-lL/Theris#readme"
 }
