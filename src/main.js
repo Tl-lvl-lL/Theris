@@ -7,4 +7,12 @@ window.addEventListener("load", () => {
             section.appendChild(canvasBlock);
         }
     })(100);
+    let element = new Figure({ color: "marron", name: "persia" });
+
+    let intervalId = element.moveY();
+    // let intervalId = element.moveX(element.location(), element.location());
+    // console.log(intervalId);
+    // document.getElementById("cancel").addEventListener("click", (e) => {
+    //     clearInterval(intervalId);
+    // });
 });
