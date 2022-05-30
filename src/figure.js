@@ -52,12 +52,28 @@ class Figure {
 
     //antes y despues
     moveY() {
+        /**
+         * Various Ways to Cancel Events in JavaScript
+         * Use event.preventDefault() to Cancel Events in JavaScript
+         * Use event.stopPropagation() to Cancel Events in JavaScript
+         * Use return false to Cancel Events in JavaScript
+         */
         let initialLocation = this.location();
         // this.draw(initialLocation, "black");
 
         let dynamicLocation = initialLocation;
-        let additionalLocation = this.moveX(initialLocation, dynamicLocation);
+        let x = 0;
+        let additionalLocation = 0;
         let interval = setInterval(() => {
+            if (x < 1) {
+                additionalLocation = this.moveX(
+                    initialLocation,
+                    dynamicLocation
+                );
+                // dynamicLocation = this.moveX(initialLocation, dynamicLocation);
+                x += 2;
+            }
+            additionalLocation += 1;
             // this.unpaint(dynamicLocation);
             // dynamicLocation += additionalLocation;
             dynamicLocation = dynamicLocation.map((p) => {
@@ -65,10 +81,12 @@ class Figure {
                     // Last block
                     clearInterval(interval);
                 }
-                console.log(`1${additionalLocation}`);
-                return (p += parseInt(`1${additionalLocation}`));
+                // console.log(`1${additionalLocation}`);
+                // return (p += parseInt(`1${additionalLocation}`));
+                return (p += 10);
             });
-            console.log(dynamicLocation);
+            // console.log(dynamicLocation);
+            console.log(additionalLocation);
             // this.draw(dynamicLocation, "black");
         }, 2000);
 
