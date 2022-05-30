@@ -56,6 +56,8 @@ class Figure {
         // this.draw(initialLocation, "black");
 
         let dynamicLocation = initialLocation;
+        let additionalLocation; //conection between MoveX and MoveY
+        dynamicLocation = this.moveX(initialLocation, dynamicLocation);
         let interval = setInterval(() => {
             // this.unpaint(dynamicLocation);
             dynamicLocation = dynamicLocation.map((p) => {
@@ -66,11 +68,10 @@ class Figure {
                 return (p += 10);
             });
             console.log(dynamicLocation);
-            dynamicLocation = this.moveX(initialLocation, dynamicLocation);
             // this.draw(dynamicLocation, "black");
         }, 2000);
 
-        return dynamicLocation;
+        return interval;
     }
     moveX(initialArr, dynamic) {
         let newArr = dynamic;
@@ -100,6 +101,7 @@ class Figure {
                     break;
             }
         });
+        console.log("Returned new Array:", newArr);
         return newArr;
     }
     /**
