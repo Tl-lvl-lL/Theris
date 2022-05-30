@@ -56,16 +56,17 @@ class Figure {
         // this.draw(initialLocation, "black");
 
         let dynamicLocation = initialLocation;
-        let additionalLocation; //conection between MoveX and MoveY
-        dynamicLocation = this.moveX(initialLocation, dynamicLocation);
+        let additionalLocation = this.moveX(initialLocation, dynamicLocation);
         let interval = setInterval(() => {
             // this.unpaint(dynamicLocation);
+            // dynamicLocation += additionalLocation;
             dynamicLocation = dynamicLocation.map((p) => {
                 if (p >= 81) {
                     // Last block
                     clearInterval(interval);
                 }
-                return (p += 10);
+                console.log(`1${additionalLocation}`);
+                return (p += parseInt(`1${additionalLocation}`));
             });
             console.log(dynamicLocation);
             // this.draw(dynamicLocation, "black");
@@ -75,25 +76,29 @@ class Figure {
     }
     moveX(initialArr, dynamic) {
         let newArr = dynamic;
+
+        let additing = 0;
         document.addEventListener("keydown", (ev) => {
             ev.preventDefault();
             switch (ev.key) {
                 case "ArrowLeft":
                     if (initialArr[0] > 0) {
-                        newArr = newArr.map((item) => (item -= 1));
+                        // newArr = newArr.map((item) => (item -= 1));
+                        additing -= 1;
                         initialArr[0]--;
                         initialArr[2]--;
                     }
-                    console.log(initialArr, newArr, dynamic);
+                    // console.log(initialArr, newArr, dynamic);
                     break;
                 case "ArrowRight":
                     if (initialArr[2] < 10) {
-                        newArr = newArr.map((item) => (item += 1));
+                        additing += 1;
+                        // newArr = newArr.map((item) => (item += 1));
                         initialArr[0]++;
                         initialArr[2]++;
                     }
                     // console.log(initialArr, newArr);
-                    console.log(initialArr, newArr, dynamic);
+                    // console.log(initialArr, newArr, dynamic);
                     break;
 
                 default:
@@ -101,8 +106,7 @@ class Figure {
                     break;
             }
         });
-        console.log("Returned new Array:", newArr);
-        return newArr;
+        return additing;
     }
     /**
      * Inicial State = RANDOM
